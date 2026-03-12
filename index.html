@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BRSA Foundation — Behavioral Readiness Standards Authority</title>
+  <meta name="description" content="The BRSA Foundation funds access to behavioral readiness evaluation and certification programs for underserved individuals across housing, workforce, corrections, and education sectors." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── TOKENS ─── */
+    :root {
+      --navy:   #1A3A5C;
+      --gold:   #C8A84B;
+      --gold-lt:#e0c87a;
+      --cream:  #f6f3ee;
+      --cream-d:#ece8e0;
+      --ink:    #1a1a1a;
+      --muted:  #5a6472;
+      --border: rgba(200,168,75,0.25);
+      --ff-serif: 'Playfair Display', Georgia, serif;
+      --ff-sans:  'Inter', system-ui, sans-serif;
+      --max-w: 1160px;
+      --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* ─── RESET ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--ff-sans);
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── UTILITY ─── */
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+    .gold-rule {
+      display: block;
+      width: 60px; height: 3px;
+      background: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .section-label {
+      font-family: var(--ff-sans);
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: var(--ff-sans);
+      font-size: .85rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .85rem 2rem;
+      border-radius: 2px;
+      transition: all .25s var(--ease);
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      border: 2px solid var(--gold);
+    }
+    .btn-primary:hover {
+      background: var(--gold-lt);
+      border-color: var(--gold-lt);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(200,168,75,.3);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--cream);
+      border: 2px solid rgba(246,243,238,.4);
+    }
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ─── TOPBAR ─── */
+    .topbar {
+      background: var(--navy);
+      padding: .5rem 0;
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      color: rgba(246,243,238,.6);
+    }
+    .topbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .topbar a { color: var(--gold); transition: opacity .2s; }
+    .topbar a:hover { opacity: .75; }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--navy);
+      border-bottom: 1px solid rgba(200,168,75,.2);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .nav-seal {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .nav-seal img { width: 44px; height: 44px; object-fit: cover; border-radius: 50%; }
+    /* Fallback seal if no logo PNG yet */
+    .seal-fallback {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ff-serif);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .nav-wordmark {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .nav-wordmark strong {
+      font-family: var(--ff-serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: .04em;
+    }
+    .nav-wordmark span {
+      font-size: .62rem;
+      font-weight: 400;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: .8rem;
+      font-weight: 500;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(246,243,238,.75);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      font-size: .75rem !important;
+      color: var(--gold) !important;
+      border: 1px solid var(--gold) !important;
+      padding: .4rem 1rem;
+      border-radius: 2px;
+    }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--navy) !important; }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+      padding: 7rem 0 6rem;
+    }
+    /* Subtle background texture */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 50%, rgba(200,168,75,.07) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 80% at 10% 80%, rgba(200,168,75,.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    /* Decorative corner rule */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 3rem; right: 3rem;
+      width: 120px; height: 120px;
+      border-top: 1px solid rgba(200,168,75,.2);
+      border-right: 1px solid rgba(200,168,75,.2);
+      pointer-events: none;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+    }
+    .hero-eyebrow {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .hero h1 {
+      font-family: var(--ff-serif);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--cream);
+      margin-bottom: 1.75rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: rgba(246,243,238,.72);
+      max-width: 520px;
+      margin-bottom: 2.75rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hero-seal {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      opacity: .9;
+    }
+    .hero-seal-img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: rgba(200,168,75,.12);
+      border: 1px solid rgba(200,168,75,.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-seal-img img { width: 100%; height: 100%; object-fit: cover; }
+    /* Fallback large seal */
+    .hero-seal-placeholder {
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: rgba(200,168,75,.08);
+      border: 2px solid rgba(200,168,75,.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .25rem;
+    }
+    .hero-seal-placeholder .mono {
+      font-family: var(--ff-serif);
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .hero-seal-placeholder .est {
+      font-size: .55rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(200,168,75,.7);
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat .num {
+      font-family: var(--ff-serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--gold);
+    }
+    .hero-stat .lbl {
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(246,243,238,.5);
+    }
+
+    /* ─── DIVIDER ─── */
+    .gold-band {
+      background: var(--gold);
+      padding: .8rem 0;
+      overflow: hidden;
+    }
+    .gold-band-inner {
+      display: flex;
+      gap: 3rem;
+      white-space: nowrap;
+      animation: ticker 30s linear infinite;
+    }
+    .gold-band-inner span {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--navy);
+      flex-shrink: 0;
+    }
+    .gold-band-inner span::before {
+      content: '◆';
+      margin-right: 1.5rem;
+      opacity: .5;
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── MISSION ─── */
+    .mission { padding: 6rem 0; background: var(--cream); }
+    .mission-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .mission h2 {
+      font-family: var(--ff-serif);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--navy);
+      margin-bottom: 1.5rem;
+    }
+    .mission p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+    .mission-right { padding-top: 3.5rem; }
+    .mission-quote {
+      border-left: 3px solid var(--gold);
+      padding-left: 1.75rem;
+      margin-bottom: 2.5rem;
+    }
+    .mission-quote blockquote {
+      font-family: var(--ff-serif);
+      font-size: 1.25rem;
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--navy);
+      margin-bottom: .75rem;
+    }
+    .mission-quote cite {
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-style: normal;
+    }
+    .distinctions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .distinction-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: white;
+      border: 1px solid var(--cream-d);
+      border-radius: 4px;
+    }
+    .distinction-icon {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--gold);
+      font-size: .75rem;
+      font-weight: 700;
+    }
+    .distinction-item h4 {
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: .2rem;
+    }
+    .distinction-item p {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* ─── FOCUS AREAS ─── */
+    .focus { padding: 6rem 0; background: var(--navy); }
+    .focus-header { text-align: center; margin-bottom: 3.5rem; }
+    .focus-header .section-label { justify-content: center; display: flex; }
+    .focus-header h2 {
+      font-family: var(--ff-serif);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+    .focus-header p {
+      font-size: .95rem;
+      color: rgba(246,243,238,.6);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: rgba(200,168,75,.1);
+    }
+    .focus-card {
+      background: rgba(255,255,255,.04);
+      padding: 2.5rem 2rem;
+      transition: background .25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .focus-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s var(--ease);
+    }
+    .focus-card:hover { background: rgba(255,255,255,.07); }
+    .focus-card:hover::before { transform: scaleX(1); }
+    .focus-num {
+      font-family: var(--ff-serif);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: rgba(200,168,75,.2);
+      line-height: 1;
+      margin-bottom: 1.25rem;
+    }
+    .focus-card h3 {
+      font-family: var(--ff-serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: .75rem;
+    }
+    .focus-card p {
+      font-size: .85rem;
+      color: rgba(246,243,238,.55);
+      line-height: 1.7;
+    }
+    .focus-tag {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(200,168,75,.3);
+      padding: .2rem .65rem;
+      border-radius: 2px;
+    }
+
+    /* ─── HOW IT WORKS ─── */
+    .how { padding: 6rem 0; background: white; }
+    .how-header { margin-bottom: 4rem; }
+    .how-header h2 {
+      font-family: var(--ff-serif);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 400;
+      color: var(--navy);
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 28px; left: 56px; right: 56px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold) 0%, rgba(200,168,75,.2) 100%);
+    }
+    .step { padding: 0 1.5rem 0 0; position: relative; }
+    .step-num {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ff-serif);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .step h4 {
+      font-family: var(--ff-serif);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: .5rem;
+    }
+    .step p {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ─── PARTNERS / CTA ─── */
+    .partners { padding: 5rem 0; background: var(--cream-d); }
+    .partners-header { text-align: center; margin-bottom: 3rem; }
+    .partners-header h2 {
+      font-family: var(--ff-serif);
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--navy);
+    }
+    .partners-header p {
+      font-size: .95rem;
+      color: var(--muted);
+      margin-top: .75rem;
+      max-width: 500px;
+      margin-inline: auto;
+    }
+    .partner-types {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .partner-type {
+      background: white;
+      border: 1px solid var(--cream-d);
+      border-radius: 4px;
+      padding: 2rem;
+      text-align: center;
+    }
+    .partner-type .icon {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+    .partner-type h4 {
+      font-family: var(--ff-serif);
+      font-size: 1rem;
+      color: var(--navy);
+      margin-bottom: .5rem;
+    }
+    .partner-type p {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .partners-cta { text-align: center; }
+
+    /* ─── CONTACT / CTA BAND ─── */
+    .cta-band {
+      background: var(--navy);
+      padding: 5rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 100% at 50% 100%, rgba(200,168,75,.08), transparent 60%);
+      pointer-events: none;
+    }
+    .cta-band h2 {
+      font-family: var(--ff-serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .cta-band p {
+      font-size: 1rem;
+      color: rgba(246,243,238,.65);
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+      position: relative;
+    }
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      position: relative;
+    }
+    .btn-gold { background: var(--gold); color: var(--navy); border: 2px solid var(--gold); }
+    .btn-gold:hover { background: var(--gold-lt); border-color: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(200,168,75,.3); }
+    .btn-navy-outline { background: transparent; color: var(--cream); border: 2px solid rgba(246,243,238,.3); }
+    .btn-navy-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ─── FOOTER ─── */
+    .footer { background: #0f2438; padding: 4rem 0 2rem; }
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(200,168,75,.12);
+    }
+    .footer-brand .brand-block {
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+      margin-bottom: 1rem;
+    }
+    .footer-brand .seal-sm {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(200,168,75,.1);
+      border: 1px solid rgba(200,168,75,.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .footer-brand .seal-sm img { width: 36px; height: 36px; object-fit: cover; border-radius: 50%; }
+    .footer-brand .seal-sm-fallback {
+      font-family: var(--ff-serif);
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .footer-brand strong {
+      font-family: var(--ff-serif);
+      font-size: .9rem;
+      color: var(--cream);
+    }
+    .footer-brand p {
+      font-size: .8rem;
+      color: rgba(246,243,238,.45);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    .footer-status {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(200,168,75,.25);
+      padding: .25rem .6rem;
+      border-radius: 2px;
+    }
+    .footer-status::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    .footer-col h5 {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+    .footer-col ul li a {
+      font-size: .82rem;
+      color: rgba(246,243,238,.5);
+      transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: var(--cream); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.5rem;
+      font-size: .72rem;
+      color: rgba(246,243,238,.3);
+    }
+    .footer-bottom a { color: rgba(246,243,238,.45); transition: color .2s; }
+    .footer-bottom a:hover { color: var(--gold); }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s var(--ease), transform .6s var(--ease);
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-seal { display: none; }
+      .mission-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .mission-right { padding-top: 0; }
+      .focus-grid { grid-template-columns: 1fr 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .steps::before { display: none; }
+      .partner-types { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .focus-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .topbar .right { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="container">
+      <span>501(c)(3) Application Pending · Incorporated in New Mexico</span>
+      <span class="right">Contact: <a href="/cdn-cgi/l/email-protection#94f2fbe1faf0f5e0fdfbfad4f6e6e7f5f2fbe1faf0f5e0fdfbfabafbe6f3"><span class="__cf_email__" data-cfemail="03656c766d6762776a6c6d4361717062656c766d6762776a6c6d2d6c7164">[email&#160;protected]</span></a></span>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="nav-brand">
+        <img src="/logo-seal.png" alt="BRSA Foundation Seal" style="width:44px;height:44px;border-radius:50%;object-fit:cover;">
+        <div class="nav-wordmark">
+          <strong>BRSA Foundation</strong>
+          <span>Behavioral Readiness Standards Authority</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#mission">Mission</a></li>
+        <li><a href="#focus">Focus Areas</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#partner">Partners</a></li>
+        <li><a href="#contact" class="nav-cta">Get Involved</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Est. 2026 · New Mexico Nonprofit</p>
+        <h1>
+          Funding Access to<br />
+          <em>Behavioral Readiness</em><br />
+          for Those Who Need It Most
+        </h1>
+        <p class="hero-sub">
+          The BRSA Foundation removes financial barriers to evaluation, certification, 
+          and longitudinal readiness support — serving individuals across housing, 
+          workforce, corrections, and education sectors.
+        </p>
+        <div class="hero-actions">
+          <a href="#partner" class="btn btn-primary">Become a Funding Partner</a>
+          <a href="#mission" class="btn btn-outline">Learn Our Mission</a>
+        </div>
+      </div>
+      <div class="hero-seal">
+        <div class="hero-seal-img"><img src="/logo-seal.png" alt="BRSA Foundation Seal"></div>
+        <div class="hero-stat">
+          <div class="num">15+</div>
+          <div class="lbl">Pilot Participants</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GOLD TICKER -->
+  <div class="gold-band" aria-hidden="true">
+    <div class="gold-band-inner">
+      <span>Housing Readiness</span>
+      <span>Workforce Development</span>
+      <span>Corrections Reentry</span>
+      <span>Education Access</span>
+      <span>Economic Mobility</span>
+      <span>BRSA Certified Evaluators</span>
+      <span>Behavioral Standards</span>
+      <!-- Duplicate for seamless loop -->
+      <span>Housing Readiness</span>
+      <span>Workforce Development</span>
+      <span>Corrections Reentry</span>
+      <span>Education Access</span>
+      <span>Economic Mobility</span>
+      <span>BRSA Certified Evaluators</span>
+      <span>Behavioral Standards</span>
+    </div>
+  </div>
+
+  <!-- MISSION -->
+  <section class="mission" id="mission">
+    <div class="container">
+      <div class="mission-inner">
+        <div class="mission-left fade-up">
+          <p class="section-label">Our Mission</p>
+          <span class="gold-rule"></span>
+          <h2>Access to Readiness Should Never Be a Question of Resources</h2>
+          <p>
+            The BRSA Foundation funds direct access to behavioral readiness evaluation 
+            and certification programs for underserved individuals — those who cannot 
+            otherwise afford the assessment, documentation, and support services 
+            that determine their eligibility for housing, employment, and civic participation.
+          </p>
+          <p>
+            We operate independently from the Legacyline platform and BRSA Holdings. 
+            We hold no technology assets and exercise no control over standards. 
+            Our sole mandate is to ensure that financial status is never a barrier 
+            to behavioral readiness certification.
+          </p>
+          <a href="#partner" class="btn btn-primary" style="margin-top:1.5rem">Support Our Work</a>
+        </div>
+        <div class="mission-right fade-up">
+          <div class="mission-quote">
+            <blockquote>
+              "Readiness is a right. The Foundation exists to ensure that no one is 
+              turned away from the process of becoming certified simply because they 
+              cannot pay."
+            </blockquote>
+            <cite>BRSA Foundation — Statement of Purpose</cite>
+          </div>
+          <div class="distinctions">
+            <div class="distinction-item">
+              <div class="distinction-icon">✦</div>
+              <div>
+                <h4>No Technology Control</h4>
+                <p>The Foundation funds access — it does not own or govern the Legacyline platform or BRSA Standards.</p>
+              </div>
+            </div>
+            <div class="distinction-item">
+              <div class="distinction-icon">✦</div>
+              <div>
+                <h4>Direct Participant Support</h4>
+                <p>Grants flow directly to evaluation fees, documentation support, and readiness coaching for individuals.</p>
+              </div>
+            </div>
+            <div class="distinction-item">
+              <div class="distinction-icon">✦</div>
+              <div>
+                <h4>501(c)(3) Pending</h4>
+                <p>Incorporated in New Mexico. Federal tax-exempt status application filed and pending IRS determination.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOCUS AREAS -->
+  <section class="focus" id="focus">
+    <div class="container">
+      <div class="focus-header fade-up">
+        <p class="section-label">Where We Work</p>
+        <h2>Six Sectors, One Standard of Readiness</h2>
+        <p>The Foundation directs funding to individuals navigating critical life transitions across sectors where behavioral readiness determines outcomes.</p>
+      </div>
+      <div class="focus-grid">
+        <div class="focus-card fade-up">
+          <div class="focus-num">01</div>
+          <h3>Housing Readiness</h3>
+          <p>Supporting individuals seeking stable housing who require behavioral readiness certification for landlord, lender, or program eligibility.</p>
+          <span class="focus-tag">Individual Readiness</span>
+        </div>
+        <div class="focus-card fade-up">
+          <div class="focus-num">02</div>
+          <h3>Workforce Development</h3>
+          <p>Funding readiness evaluation for job seekers whose employment prospects depend on documented behavioral competencies.</p>
+          <span class="focus-tag">Economic Mobility</span>
+        </div>
+        <div class="focus-card fade-up">
+          <div class="focus-num">03</div>
+          <h3>Corrections Reentry</h3>
+          <p>Partnering with reentry programs to provide certification pathways for justice-involved individuals re-entering society.</p>
+          <span class="focus-tag">Second Chance</span>
+        </div>
+        <div class="focus-card fade-up">
+          <div class="focus-num">04</div>
+          <h3>Education Access</h3>
+          <p>Removing certification cost barriers for students and adults whose enrollment or academic standing requires readiness documentation.</p>
+          <span class="focus-tag">Academic Continuity</span>
+        </div>
+        <div class="focus-card fade-up">
+          <div class="focus-num">05</div>
+          <h3>Economic Development</h3>
+          <p>Supporting community-based economic initiatives that require workforce behavioral readiness as a program standard.</p>
+          <span class="focus-tag">Community Investment</span>
+        </div>
+        <div class="focus-card fade-up">
+          <div class="focus-num">06</div>
+          <h3>Institutional Partnerships</h3>
+          <p>Working with lenders, housing authorities, and employers to establish grant-funded readiness tracks within their programs.</p>
+          <span class="focus-tag">Systemic Change</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="container">
+      <div class="how-header fade-up">
+        <p class="section-label">How It Works</p>
+        <span class="gold-rule"></span>
+        <h2>From Grant to Certification</h2>
+      </div>
+      <div class="steps">
+        <div class="step fade-up">
+          <div class="step-num">1</div>
+          <h4>Referral & Intake</h4>
+          <p>Individuals are referred through partner organizations or apply directly. A brief intake confirms eligibility and need.</p>
+        </div>
+        <div class="step fade-up">
+          <div class="step-num">2</div>
+          <h4>Grant Award</h4>
+          <p>The Foundation reviews the referral and issues a grant covering evaluation fees and associated documentation costs.</p>
+        </div>
+        <div class="step fade-up">
+          <div class="step-num">3</div>
+          <h4>BRSA Evaluation</h4>
+          <p>A certified BRSA evaluator conducts the behavioral assessment through the Legacyline platform.</p>
+        </div>
+        <div class="step fade-up">
+          <div class="step-num">4</div>
+          <h4>Certification Issued</h4>
+          <p>Upon successful evaluation, the individual receives a BRSA Readiness Certification usable across housing, workforce, and partner institutions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="partners" id="partner">
+    <div class="container">
+      <div class="partners-header fade-up">
+        <p class="section-label">Partnership</p>
+        <h2>We Need Partners Who Believe Readiness Is a Right</h2>
+        <p>Funding and institutional partners make it possible for the Foundation to serve individuals who would otherwise go without.</p>
+      </div>
+      <div class="partner-types fade-up">
+        <div class="partner-type">
+          <div class="icon">🏦</div>
+          <h4>Funding Partners</h4>
+          <p>Foundations, government agencies, CDFIs, and philanthropic organizations that provide grant capital to fund individual access.</p>
+        </div>
+        <div class="partner-type">
+          <div class="icon">🏛️</div>
+          <h4>Institutional Partners</h4>
+          <p>Housing authorities, workforce boards, corrections departments, and educational institutions that integrate readiness certification into their programs.</p>
+        </div>
+        <div class="partner-type">
+          <div class="icon">🤝</div>
+          <h4>Referral Partners</h4>
+          <p>Community organizations, case managers, and social service providers that identify and refer eligible individuals to the Foundation.</p>
+        </div>
+      </div>
+      <div class="partners-cta fade-up">
+        <a href="#contact" class="btn btn-primary">Sign a Memorandum of Understanding</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="cta-band" id="contact">
+    <div class="container">
+      <h2>Ready to Fund Access?</h2>
+      <p>
+        Whether you're a philanthropic funder, institutional partner, or community organization — 
+        there's a role for you in expanding access to behavioral readiness.
+      </p>
+      <div class="cta-actions">
+        <a href="/cdn-cgi/l/email-protection#67010812090306130e08092705151406010812090306130e080949081500" class="btn btn-gold">Contact the Foundation</a>
+        <a href="/cdn-cgi/l/email-protection#f0969f859e949184999f9eb092828391969f859e949184999f9ede9f8297cf8385929a959384cdbdbfa5d5c2c0a2958185958384" class="btn btn-navy-outline">Request an MOU</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="brand-block">
+            <div class="seal-sm"><img src="/logo-seal.png" alt="BRSA Foundation Seal"></div>
+            <strong>BRSA Foundation</strong>
+          </div>
+          <p>
+            A New Mexico nonprofit organization funding access to behavioral 
+            readiness evaluation and certification for underserved individuals.
+          </p>
+          <span class="footer-status">501(c)(3) Pending</span>
+        </div>
+        <div class="footer-col">
+          <h5>Organization</h5>
+          <ul>
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#focus">Focus Areas</a></li>
+            <li><a href="#how">How It Works</a></li>
+            <li><a href="#">Board & Leadership</a></li>
+            <li><a href="#">Annual Report</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Programs</h5>
+          <ul>
+            <li><a href="#">Individual Grants</a></li>
+            <li><a href="#">Institutional Partners</a></li>
+            <li><a href="#">Referral Network</a></li>
+            <li><a href="#">MOU Framework</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="/cdn-cgi/l/email-protection#791f160c171d180d101617391b0b0a181f160c171d180d10161757160b1e"><span class="__cf_email__" data-cfemail="02646d776c6663766b6d6c4260707163646d776c6663766b6d6c2c6d7065">[email&#160;protected]</span></a></li>
+            <li><a href="#">New Mexico, USA</a></li>
+            <li><a href="https://legacylinehq.com" target="_blank" rel="noopener">Legacyline Platform ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 BRSA Foundation. All rights reserved. 501(c)(3) status pending.</span>
+        <span>
+          <a href="#">Privacy Policy</a> &nbsp;·&nbsp;
+          <a href="#">Terms</a> &nbsp;·&nbsp;
+          Governed independently from BRSA Holdings Inc.
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Intersection observer for fade-up animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) 
