@@ -370,7 +370,7 @@ footer h5{color:var(--gold);margin-bottom:14px;font-weight:500}.fg a,.fg span{di
 <div class="sys"><div class="row h mono"><span>System status</span><span style="color:var(--mut)">simulated</span></div>
 <div class="row"><span>Hub · Albuquerque, NM</span><span>● ONLINE</span></div>
 <div class="row"><span>Readiness engine</span><span>● OPERATIONAL</span></div>
-<div class="row"><span>Illustrative partner nodes</span><span id="ncount" style="color:var(--gold2)">0 / 8</span></div>
+<div class="row"><span>Illustrative partner nodes</span><span id="ncount" style="color:var(--gold2)">0 / 9</span></div>
 <div class="row"><span>Simulated pings this session</span><span id="pings" style="color:var(--gold2)">0</span></div>
 <div class="log" id="mlog"></div>
 <div class="note mono">Simulation · illustrative only · no real data</div></div>
@@ -588,7 +588,7 @@ const rio=[[-105.73,37],[-105.9,36.4],[-106.2,35.8],[-106.65,35.1],[-106.78,34.4
 el('path',{d:'M'+rio.map(p=>pj(...p).join(' ')).join('L'),fill:'none',stroke:'rgba(127,216,255,.35)','stroke-width':1.5,'stroke-dasharray':'2 4'});
 el('text',{x:pj(-106.95,33.55)[0],y:pj(-106.95,33.55)[1],class:'cityl',fill:'#5d7f99',transform:'rotate(-72 '+pj(-106.95,33.55).join(' ')+')',style:'font-size:8px;fill:#4f6d85'}).textContent='RIO GRANDE';
 const hub=pj(-106.65,35.08);
-const cities=[['Santa Fe',-105.94,35.69],['Taos',-105.57,36.41],['Farmington',-108.2,36.73],['Gallup',-108.74,35.53],['Clovis',-103.2,34.4],['Roswell',-104.52,33.39],['Las Cruces',-106.76,32.32],['Silver City',-108.28,32.77]];
+const cities=[['Santa Fe',-105.94,35.69],['Taos',-105.57,36.41],['Farmington',-108.2,36.73],['Gallup',-108.74,35.53],['Clovis',-103.2,34.4],['Roswell',-104.52,33.39],['Hobbs',-103.14,32.70],['Las Cruces',-106.76,32.32],['Silver City',-108.28,32.77]];
 const arcsG=el('g',{}),dotsG=el('g',{});const arcs=[];
 cities.forEach((c,i)=>{const p=pj(c[1],c[2]);const mx=(+hub[0]+ +p[0])/2,my=(+hub[1]+ +p[1])/2;const dx=p[0]-hub[0],dy=p[1]-hub[1];const L=Math.hypot(dx,dy);const cx=mx-dy/L*L*.22,cy=my+dx/L*L*.22;
  const d='M'+hub.join(' ')+'Q'+cx.toFixed(1)+' '+cy.toFixed(1)+' '+p.join(' ');
@@ -607,8 +607,8 @@ function logPing(){const i=Math.floor(Math.random()*cities.length);pings++;$('#p
  const a=arcs[i][1];a.style.opacity=1;setTimeout(()=>a.style.opacity=.8,600)}
 function mapStart(){if(mapOn)return;mapOn=true;svg.unpauseAnimations&&svg.unpauseAnimations();$$('circle[r="2.6"]',svg).forEach(c=>c.setAttribute('opacity',.95));
  const tl=G&&!RM?G.timeline():null;
- arcs.forEach(([a,f],i)=>{const len=a.getTotalLength();if(tl){a.style.strokeDasharray=len;a.style.strokeDashoffset=len;tl.to(a,{strokeDashoffset:0,duration:.9,ease:'power2.out'},i*.12).to(dotsG.children[i*2],{opacity:1,duration:.4},i*.12+.6).add(()=>{f.style.opacity=.8;$('#ncount').textContent=(i+1)+' / 8'},i*.12+.8)}else{f.style.opacity=.8;dotsG.children[i*2].style.opacity=1}});
- if(!tl)$('#ncount').textContent='8 / 8';
+ arcs.forEach(([a,f],i)=>{const len=a.getTotalLength();if(tl){a.style.strokeDasharray=len;a.style.strokeDashoffset=len;tl.to(a,{strokeDashoffset:0,duration:.9,ease:'power2.out'},i*.12).to(dotsG.children[i*2],{opacity:1,duration:.4},i*.12+.6).add(()=>{f.style.opacity=.8;$('#ncount').textContent=(i+1)+' / 9'},i*.12+.8)}else{f.style.opacity=.8;dotsG.children[i*2].style.opacity=1}});
+ if(!tl)$('#ncount').textContent='9 / 9';
  if(!RM)pingT=setInterval(logPing,1400);logPing()}
 function mapStop(){if(!mapOn)return;svg.pauseAnimations&&svg.pauseAnimations();clearInterval(pingT);pingT=null;mapOn=false;mapOnce=true}
 let mapOnce=false;
