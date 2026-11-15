@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="hero.jpg">
+<link rel="canonical" href="https://www.brsafoundation.org/">
 <style>
 :root{--bg:#04060c;--n1:#081224;--n2:#0e1f3a;--gold:#e8c66a;--gold2:#ffe6a3;--sig:#7fd8ff;--ok:#5ee39a;--txt:#eef1f6;--mut:#8e9bb0;--line:rgba(232,198,106,.16);--glass:rgba(12,22,42,.55);--serif:'Instrument Serif',serif;--sans:'Inter',sans-serif;--mono:'JetBrains Mono',monospace}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -274,7 +275,7 @@ footer h5{color:var(--gold);margin-bottom:14px;font-weight:500}.fg a,.fg span{di
 <section class="hero" id="top">
 <div class="stage" id="stage"><div class="tilt" id="tilt">
 <img src="hero.jpg" alt="" fetchpriority="high">
-<video id="heroLoop" muted loop playsinline preload="none" data-src="media/hero-loop.mp4" aria-hidden="true"></video>
+<video id="heroLoop" muted loop playsinline autoplay preload="metadata" poster="media/hero-loop.jpg" src="media/hero-loop.mp4" data-src="media/hero-loop.mp4" aria-hidden="true"></video>
 <canvas id="net" aria-hidden="true"></canvas>
 </div></div>
 <div class="shade"></div><div class="grain"></div>
@@ -497,7 +498,14 @@ let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{layout
 new IntersectionObserver(es=>{heroVis=es[0].isIntersecting},{threshold:0}).observe($('.hero'));
 
 /* hero loop video (desktop only) */
-const hl=$('#heroLoop');if(!RM&&innerWidth>620){hl.src=hl.dataset.src;hl.play().catch(()=>{})}else hl.remove();
+const hl=$('#heroLoop');
+if(RM||innerWidth<=620){hl.remove();}
+else{
+  const play=()=>hl.play().catch(()=>{});
+  if(hl.readyState>=2) play();
+  else hl.addEventListener('canplay',play,{once:true});
+}
+
 
 /* ---------- hero intro + scroll + tilt ---------- */
 const hw=split($('#h1'));
